@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+
+{% block title %} Blog Page {% endblock %} 
+
+
+{% block content %}
+<h1 class="text-center mt-4">Welcome to chai aur Django Project</h1>
+
+
+<h2>
+    {% if form.instance.pk %}
+        Edit Tweet
+        {% else %} 
+            Create Tweet
+    {% endif %}
+</h2>
+
+<form method="post" enctype="multipart/form-data" class="form">
+    {% csrf_token %}
+{{form.as_p}}
+{% comment %} {{form}} {% endcomment %}
+
+<a href="{% url "tweet_list" %}" class="btn btn-danger">Cancel</a>
+<button type="submit" class="btn btn-success m-1">{% if form.instance.pk %}
+    Update
+    {% else %} 
+    Create
+{% endif %}</button>
+
+</form>
+
+{% endblock %}
